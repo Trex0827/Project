@@ -50,6 +50,7 @@ ideas.forEach((idea,idx)=>{
 });
 
 function openBook(index){
+  document.body.classList.add('book-is-open');
   current=ideas[index]; spreadIndex=0; clearTimeout(closeTimer);
   overlay.classList.remove('reading','closing','back-cover-view'); overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
   ['cover','back-cover'].forEach(id=>document.getElementById(id).style.backgroundColor=current.color);
@@ -61,7 +62,7 @@ function openBook(index){
   document.getElementById('back-cover-number').textContent=current.no;
   document.getElementById('reader-title').textContent=current.title;
   renderSpread(false);
-  requestAnimationFrame(()=>document.getElementById('open-this-book').focus({preventScroll:true}));
+  requestAnimationFrame(()=>{if(!overlay.classList.contains('reading'))document.getElementById('open-this-book').focus({preventScroll:true});});
 }
 function beginReading(){if(!current||overlay.classList.contains('reading'))return;overlay.classList.remove('back-cover-view');overlay.classList.add('reading');}
 
@@ -78,10 +79,42 @@ function renderVisual(s){
   const vf=document.getElementById('visual-frame');
   if(s.visual==='poster') vf.innerHTML='<div class="poster-art overview-poster"><img src="assets/night-ride-poster.jpg" alt="NIGHT RIDE 게임 기획 요약 포스터"></div>';
   else if(s.visual==='flow') vf.innerHTML=`<div class="flow-art"><div><b>01</b><span>자전거로 이동</span></div><i>↓</i><div><b>02</b><span>이상현상 발견</span></div><i>↓</i><div><b>03</b><span>규칙 추론</span></div><i>↓</i><div><b>04</b><span>행동 선택</span></div><i>↓</i><div><b>05</b><span>생존 / 루프</span></div><i>↓</i><div><b>06</b><span>다음 구간</span></div></div>`;
-  else if(s.visual==='event') vf.innerHTML=`<div class="event-art"><a href="${s.event.image}" target="_blank" rel="noopener" title="${s.event.title} 원본 이미지 보기"><img src="${s.event.image}" alt="${s.event.title} 이벤트 컨셉 이미지"></a><span>EVENT ${s.event.no} · 원본 보기 ↗</span></div>`;
+  else if(s.visual==='event') vf.innerHTML=`<div class="event-art"><img src="${s.event.image}" alt="${s.event.title} 이벤트 컨셉 이미지"><span>EVENT ${s.event.no}</span></div>`;
   else if(s.visual==='animal') vf.innerHTML='<div class="animal-art"><img src="assets/animal.png" alt="병맛 동물 대전 참고 이미지"></div>';
   else vf.innerHTML=`<div class="abstract-art" style="--art1:${s.art?.[0]||'#333'};--art2:${s.art?.[1]||'#777'}"><span>${current.no}</span></div>`;
+  const art=vf.firstElementChild;
+  const trigger=document.createElement('button');
+  trigger.type='button'; trigger.className='visual-expand';
+  trigger.setAttribute('aria-label',`${s.title} 크게 보기`);
+  trigger.setAttribute('aria-haspopup','dialog');
+  trigger.appendChild(art); vf.appendChild(trigger);
+  trigger.addEventListener('click',()=>openVisual(s,art));
+  const hint=document.createElement('span');
+  hint.className='visual-expand-hint'; hint.textContent='눌러서 크게 보기 ↗'; hint.setAttribute('aria-hidden','true');
+  vf.appendChild(hint);
 }
+
+const viewer=document.getElementById('visual-viewer');
+const viewerContent=document.getElementById('viewer-content');
+const viewerZoom=document.getElementById('viewer-zoom');
+function openVisual(s,art){
+  document.getElementById('viewer-title').textContent=s.title;
+  viewerContent.replaceChildren(); viewerContent.classList.remove('original-size');
+  viewerZoom.setAttribute('aria-pressed','false'); viewerZoom.textContent='원본 크기';
+  const source=art.querySelector('img');
+  viewerZoom.hidden=!source;
+  viewerContent.appendChild(source?source.cloneNode(true):art.cloneNode(true));
+  viewer.showModal(); viewerContent.scrollTop=0; viewerContent.scrollLeft=0;
+  document.getElementById('viewer-close').focus({preventScroll:true});
+}
+document.getElementById('viewer-close').onclick=()=>viewer.close();
+viewer.addEventListener('click',e=>{if(e.target===viewer)viewer.close();});
+viewerZoom.onclick=()=>{
+  const original=viewerContent.classList.toggle('original-size');
+  viewerZoom.setAttribute('aria-pressed',String(original));
+  viewerZoom.textContent=original?'화면에 맞추기':'원본 크기';
+  viewerContent.scrollTop=0; viewerContent.scrollLeft=0;
+};
 function renderSpread(animate=true){
   if(!current)return; const s=current.spreads[spreadIndex]; const p1=spreadIndex*2+1,p2=p1+1;
   document.getElementById('spread-section-left').textContent=s.section;
@@ -92,6 +125,7 @@ function renderSpread(animate=true){
   document.getElementById('spread-title').textContent=s.title;
   document.getElementById('spread-lead').textContent=s.lead;
   renderText(s); renderVisual(s);
+  openBookEl.scrollTop=0;
   document.getElementById('visual-caption').textContent=s.caption;
   document.getElementById('spread-count').textContent=`${String(spreadIndex+1).padStart(2,'0')} / ${String(current.spreads.length).padStart(2,'0')}`;
   document.getElementById('prev-spread').disabled=spreadIndex===0;
@@ -103,7 +137,7 @@ document.getElementById('prev-spread').onclick=()=>{if(spreadIndex>0){spreadInde
 document.getElementById('next-spread').onclick=()=>{if(!current)return;if(spreadIndex<current.spreads.length-1){spreadIndex++;renderSpread();}else showBackCover();};
 function showBackCover(){if(!current||!overlay.classList.contains('reading'))return;overlay.classList.add('back-cover-view');document.getElementById('back-cover').setAttribute('aria-hidden','false');setTimeout(()=>document.getElementById('shelve-from-back').focus({preventScroll:true}),620);}
 function returnToLastPage(){if(!current)return;overlay.classList.remove('back-cover-view');document.getElementById('back-cover').setAttribute('aria-hidden','true');setTimeout(()=>document.getElementById('next-spread').focus({preventScroll:true}),520);}
-function closeBook(){clearTimeout(closeTimer);const wasReading=overlay.classList.contains('reading');overlay.classList.add('closing');overlay.classList.remove('reading','back-cover-view');closeTimer=setTimeout(()=>{overlay.classList.remove('open','closing','back-cover-view');document.getElementById('back-cover').setAttribute('aria-hidden','true');overlay.setAttribute('aria-hidden','true');current=null;},wasReading?720:300);}
+function closeBook(){if(viewer.open)viewer.close();clearTimeout(closeTimer);const wasReading=overlay.classList.contains('reading');overlay.classList.add('closing');overlay.classList.remove('reading','back-cover-view');closeTimer=setTimeout(()=>{overlay.classList.remove('open','closing','back-cover-view');document.getElementById('back-cover').setAttribute('aria-hidden','true');overlay.setAttribute('aria-hidden','true');document.body.classList.remove('book-is-open');current=null;},wasReading?720:300);}
 
 document.getElementById('open-this-book').onclick=beginReading;
 document.getElementById('cover-return').onclick=closeBook;
@@ -111,4 +145,4 @@ document.getElementById('overlay-close').onclick=closeBook;
 document.getElementById('return-book').onclick=closeBook;
 document.getElementById('back-to-last-page').onclick=returnToLastPage;
 document.getElementById('shelve-from-back').onclick=closeBook;
-document.addEventListener('keydown',e=>{if(!overlay.classList.contains('open'))return;if(e.key==='Escape'){closeBook();return;}if(overlay.classList.contains('back-cover-view')){if(e.key==='ArrowLeft')returnToLastPage();if(e.key==='Enter')closeBook();return;}if(!overlay.classList.contains('reading')){if(e.key==='Enter'||e.key===' '){e.preventDefault();beginReading();}return;}if(e.key==='ArrowRight')document.getElementById('next-spread').click();if(e.key==='ArrowLeft')document.getElementById('prev-spread').click();});
+document.addEventListener('keydown',e=>{if(viewer.open||!overlay.classList.contains('open'))return;if(e.key==='Escape'){closeBook();return;}if(overlay.classList.contains('back-cover-view')){if(e.key==='ArrowLeft')returnToLastPage();if(e.key==='Enter')closeBook();return;}if(!overlay.classList.contains('reading')){if(e.key==='Enter'||e.key===' '){e.preventDefault();beginReading();}return;}if(e.key==='ArrowRight')document.getElementById('next-spread').click();if(e.key==='ArrowLeft')document.getElementById('prev-spread').click();});
