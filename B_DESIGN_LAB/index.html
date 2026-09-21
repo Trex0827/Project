@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Design Lab — Team Concept Board</title>
+  <meta name="description" content="팀 게임 아이디어를 기획실 보드처럼 탐색하는 인터랙티브 컨셉 페이지" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="lab-header">
+    <div class="lab-brand">
+      <span class="stamp">PRE-PRODUCTION</span>
+      <div><strong>GAME DESIGN LAB</strong><small>TEAM PROJECT / IDEA WALL</small></div>
+    </div>
+    <div class="lab-meta"><span>SESSION</span><strong>2026.09</strong><span>BOARD</span><strong>01</strong></div>
+  </header>
+
+  <main class="workspace">
+    <aside class="tool-rail">
+      <span class="rail-title">INDEX</span>
+      <button class="filter active" data-filter="all">ALL <b>06</b></button>
+      <button class="filter" data-filter="main">MAIN <b>02</b></button>
+      <button class="filter" data-filter="early">EARLY <b>03</b></button>
+      <button class="filter" data-filter="hold">HOLD <b>01</b></button>
+      <div class="rail-rule"></div>
+      <span class="rail-title">LEGEND</span>
+      <div class="legend"><i class="dot red"></i> 주요 후보</div>
+      <div class="legend"><i class="dot yellow"></i> 아이디어 단계</div>
+      <div class="legend"><i class="dot gray"></i> 조건부</div>
+    </aside>
+
+    <section class="board-shell">
+      <div class="board-topline">
+        <div><span>QUESTION OF THE DAY</span><strong>“우리가 지금 가장 만들고 싶은 게임은?”</strong></div>
+        <p>카드를 눌러 메모와 기획 내용을 확인하세요.</p>
+      </div>
+      <div class="board" id="board">
+        <svg class="strings" viewBox="0 0 1400 780" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M170 200 C 330 120, 390 260, 555 225"/>
+          <path d="M565 235 C 760 165, 830 320, 1010 255"/>
+          <path d="M260 510 C 455 410, 625 550, 790 470"/>
+          <path d="M800 475 C 965 405, 1085 570, 1220 490"/>
+        </svg>
+        <div class="tape tape-a"></div><div class="tape tape-b"></div><div class="tape tape-c"></div>
+        <div id="cards"></div>
+        <div class="scribble s1">FUN?</div><div class="scribble s2">scope</div><div class="scribble s3">prototype ↓</div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="dossier" id="dossier" aria-hidden="true">
+    <button class="dossier-close" id="dossier-close" type="button">CLOSE ×</button>
+    <div class="dossier-head">
+      <span id="detail-number">CASE 01</span>
+      <span id="detail-status">MAIN CANDIDATE</span>
+    </div>
+    <div class="dossier-hero">
+      <div class="detail-visual" id="detail-visual"></div>
+      <div class="detail-title">
+        <span id="detail-type">HORROR / PUZZLE</span>
+        <h1 id="detail-name">NIGHT RIDE</h1>
+        <p id="detail-ko">밤에 자전거 타고 가기</p>
+      </div>
+    </div>
+    <div class="dossier-grid">
+      <section>
+        <span class="section-label">CONCEPT NOTE</span>
+        <p class="big-note" id="detail-summary"></p>
+      </section>
+      <section>
+        <span class="section-label">CURRENT NOTES</span>
+        <ul id="detail-notes"></ul>
+      </section>
+      <section>
+        <span class="section-label">AVAILABLE / REFERENCE</span>
+        <div class="resource-list" id="detail-resources"></div>
+      </section>
+      <section>
+        <span class="section-label">DISCUSSION</span>
+        <div class="questions" id="detail-questions"></div>
+      </section>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

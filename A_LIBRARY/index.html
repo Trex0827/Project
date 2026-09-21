@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Library — Team Game Concepts</title>
+  <meta name="description" content="팀 프로젝트 아이디어를 책장과 기획서 책으로 탐색하는 인터랙티브 컨셉 페이지" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="library-header">
+    <div>
+      <span class="micro">TEAM PROJECT ARCHIVE · 2026</span>
+      <h1>PROJECT<br>LIBRARY</h1>
+    </div>
+    <div class="header-note">
+      <span>PRE-PRODUCTION</span>
+      <strong>아이디어를 한 권씩 꺼내 읽어보세요.</strong>
+    </div>
+  </header>
+
+  <main>
+    <section class="library-room" id="library-room" aria-label="아이디어 책장">
+      <div class="shelf-sign">
+        <span>GAME CONCEPT COLLECTION</span>
+        <span id="book-count">6 BOOKS</span>
+      </div>
+      <div class="shelf-stage">
+        <div class="shelf-lamp" aria-hidden="true"></div>
+        <div class="books" id="books"></div>
+        <div class="shelf-plank"></div>
+      </div>
+      <div class="catalogue">
+        <span>CATALOGUE</span>
+        <p>메인 후보 2개와 초기 아이디어를 함께 보관한 팀 프로젝트 기획 아카이브.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="book-overlay" id="book-overlay" aria-hidden="true">
+    <button class="overlay-close" id="overlay-close" type="button" aria-label="책 닫기">×</button>
+    <div class="book-scene">
+      <div class="book-shell" id="book-shell">
+        <div class="cover" id="cover">
+          <div class="cover-inner">
+            <span class="cover-index" id="cover-index">BOOK 01</span>
+            <div>
+              <small>TEAM PROJECT ARCHIVE</small>
+              <h2 id="cover-title">NIGHT RIDE</h2>
+              <p id="cover-subtitle">밤에 자전거 타고 가기</p>
+            </div>
+            <span class="cover-year">2026 · CONCEPT</span>
+          </div>
+        </div>
+
+        <div class="back-cover" id="back-cover" aria-hidden="true">
+          <div class="back-cover-inner">
+            <span class="back-cover-mark">TEAM PROJECT ARCHIVE</span>
+            <div class="back-cover-copy">
+              <small>END OF CONCEPT BOOK</small>
+              <h2 id="back-cover-title">NIGHT RIDE</h2>
+              <p id="back-cover-subtitle">밤에 자전거 타고 가기</p>
+            </div>
+            <div class="back-cover-footer">
+              <div class="archive-stamp">ARCHIVE<br><strong id="back-cover-number">01</strong></div>
+              <div class="book-barcode" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <span>2026 · PRE-PRODUCTION</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="open-book" id="open-book">
+          <div class="page left-page">
+            <div class="paper-noise" aria-hidden="true"></div>
+            <div class="page-head">
+              <span id="spread-section-left">REFERENCE</span>
+              <span id="left-page-no">01</span>
+            </div>
+            <div class="visual-frame" id="visual-frame"></div>
+            <div class="visual-caption" id="visual-caption">CONCEPT VISUAL</div>
+          </div>
+          <div class="book-gutter" aria-hidden="true"></div>
+          <div class="page right-page">
+            <div class="paper-noise" aria-hidden="true"></div>
+            <div class="page-head">
+              <span id="spread-section-right">OVERVIEW</span>
+              <span id="right-page-no">02</span>
+            </div>
+            <div class="page-copy">
+              <span class="chapter" id="chapter">CHAPTER 01</span>
+              <h3 id="spread-title">밤길에서 만나는 이상현상</h3>
+              <p class="lead" id="spread-lead"></p>
+              <div class="body-copy" id="spread-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-controls" id="cover-controls">
+      <button class="open-this-book" id="open-this-book" type="button">OPEN THIS BOOK →</button>
+      <button class="cover-return" id="cover-return" type="button">RETURN TO SHELF</button>
+    </div>
+
+    <div class="back-cover-controls" id="back-cover-controls">
+      <button id="back-to-last-page" type="button">← BACK TO LAST PAGE</button>
+      <button id="shelve-from-back" type="button">RETURN THIS BOOK TO SHELF</button>
+    </div>
+
+    <div class="reader-controls">
+      <button id="prev-spread" type="button">← PREV</button>
+      <div class="spread-status">
+        <span id="reader-title">NIGHT RIDE</span>
+        <strong id="spread-count">01 / 04</strong>
+      </div>
+      <button id="next-spread" type="button">NEXT →</button>
+    </div>
+    <button class="return-book" id="return-book" type="button">RETURN THIS BOOK TO SHELF</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
