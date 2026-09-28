@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --ink:#241c17; --paper:#efe7d5; --paper2:#e8dcc5; --wood:#5d3c29; --wood2:#38251b;
   --cream:#f3ebdc; --muted:#8e7e6d; --accent:#b24c35; --shadow:rgba(21,12,7,.36);
 }
@@ -17,6 +17,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 @keyframes pageRefresh{0%{opacity:.58;filter:blur(1px)}100%{opacity:1;filter:blur(0)}}
 @keyframes coverIntro{from{transform:translate(-50%,-42%) scale(.75) rotateX(8deg);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
 @media (max-width:820px){.library-header{align-items:flex-start;gap:30px}.header-note{display:none}.shelf-stage{padding-left:18px;padding-right:18px;min-height:420px}.books{justify-content:flex-start;overflow-x:auto;padding:0 14px}.book{flex:0 0 auto}.book-shell{height:74vh}.open-book{grid-template-columns:1fr}.left-page{display:none}.book-gutter{display:none}.right-page{border-radius:8px}.reader-controls{gap:10px}.page{padding:26px}.page-copy{padding-top:18px}.catalogue{grid-template-columns:1fr}}
+
 
 /* v3: cover-first reading flow */
 .cover-controls{
@@ -48,6 +49,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 .cover-return{background:rgba(255,255,255,.03)}
 .cover-return:hover,.cover-return:focus-visible{background:rgba(255,255,255,.1);outline:none}
 
+
 /* Keep the contents completely hidden until the reader explicitly opens the cover. */
 .book-overlay.open:not(.reading) .open-book{opacity:0;transform:scale(.82) rotateX(7deg);pointer-events:none}
 .book-overlay.reading .cover-controls{opacity:0;transform:translateY(4px);pointer-events:none;transition-delay:0s}
@@ -57,11 +59,13 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 .book-overlay.closing .cover-controls,.book-overlay.closing .reader-controls,.book-overlay.closing .return-book{opacity:0!important;pointer-events:none!important;transition-delay:0s!important}
 .book-overlay.closing .cover{animation:none}
 
+
 @media (max-width:820px){
   .cover-controls{margin-top:10px;flex-wrap:wrap}
   .cover-controls button{padding:11px 14px}
   .open-this-book{min-width:170px}
 }
+
 
 /* v4: allow the cover to physically flip after the intro animation. */
 .book-overlay.open .cover{animation:coverIntro .72s .10s ease-out}
@@ -70,6 +74,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
   backface-visibility:hidden;
   transform:translate(-100%,-50%) rotateY(-168deg);
 }
+
 
 /* v5: finish the reading flow with a physical back cover. */
 .back-cover{
@@ -116,6 +121,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 .book-barcode i{display:block;background:#f0dfca;width:2px}
 .book-barcode i:nth-child(2n){width:4px}.book-barcode i:nth-child(3n){width:1px}.book-barcode i:nth-child(5n){width:6px}
 .back-cover-footer>span{grid-area:year;text-align:right;margin-top:10px;opacity:.72}
+
 
 .book-overlay.back-cover-view .open-book{
   opacity:0;
@@ -166,11 +172,14 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 }
 .book-overlay.closing .back-cover,.book-overlay.closing .back-cover-controls{opacity:0!important;pointer-events:none!important;transition-delay:0s!important}
 
+
 @media (max-width:820px){
   .back-cover{width:min(460px,82vw);height:min(610px,68vh)}
   .back-cover-controls{flex-wrap:wrap;margin-top:10px}
   .back-cover-controls button{padding:11px 14px}
 }
+
+
 
 
 .poster-art{position:absolute;inset:0;background:#111;display:grid;place-items:center;overflow:hidden}
@@ -179,6 +188,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 .event-board div{display:grid;grid-template-columns:54px 1fr;align-items:center;gap:12px;border:1px solid rgba(78,53,40,.18);background:rgba(255,255,255,.48);padding:14px 12px;box-shadow:0 8px 18px rgba(0,0,0,.04)}
 .event-board b{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#6f2c28;color:#f8efdf;font:800 14px/1 Arial,sans-serif}
 .event-board span{font:700 14px/1.4 Arial,sans-serif;color:#3a2a22}
+
 
 /* v7 — centered book, structured 14-spread Night Ride document */
 .book-overlay{display:block}
@@ -209,6 +219,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
 .book-overlay.reading .page-copy h3{font-size:clamp(30px,3.1vw,50px);margin-bottom:16px}
 .book-overlay.reading .lead{font-size:15px;line-height:1.65;margin-bottom:16px}
 
+
 @media (max-height:820px) and (min-width:821px){
   .book-scene{top:52%}
   .book-shell{height:64vh}
@@ -223,6 +234,7 @@ button{font:inherit}.ambient{position:fixed;inset:0;pointer-events:none;backgrou
   .return-book{bottom:1.2vh}
   .event-detail p{font-size:12px}
 }
+
 
 /* Responsive reading and an accessible, in-page visual viewer. */
 body.book-is-open{overflow:hidden}
@@ -280,3 +292,39 @@ body.book-is-open{overflow:hidden}
   .viewer-actions{margin-left:auto}
   .viewer-content{padding:6px}
 }
+
+
+
+
+/* v8 — Napolitan notebook & unrecorded jangseung pages */
+.notice-art{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#111725 0 48%,#1f2328 48% 54%,#201b16 54% 100%)}
+.notice-art:before{content:"";position:absolute;left:50%;bottom:-6%;width:54%;height:64%;transform:translateX(-50%);background:linear-gradient(88deg,#2b2723,#70614b 48%,#292521 52%);clip-path:polygon(41% 0,59% 0,100% 100%,0 100%)}
+.bridge-moon{position:absolute;right:12%;top:10%;width:54px;height:54px;border-radius:50%;background:#e2dcc4;box-shadow:0 0 46px rgba(241,231,188,.28)}
+.lamp-post{position:absolute;left:25%;bottom:18%;width:10px;height:56%;background:#181614;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
+.lamp-post:before{content:"";position:absolute;left:-2px;top:-5px;width:50px;height:7px;background:#181614}
+.lamp-post i{position:absolute;left:31px;top:-8px;width:24px;height:14px;border-radius:3px;background:#e7c98a;box-shadow:0 0 34px rgba(239,198,118,.5)}
+.lamp-post span{position:absolute;left:10px;top:12%;width:4px;height:74%;background:rgba(255,219,153,.08);transform:skewX(-9deg)}
+.notice-paper{position:absolute;left:31%;top:25%;width:44%;min-height:48%;padding:22px 20px 18px;background:#e7dcc5;color:#3d2d21;box-shadow:0 13px 28px rgba(0,0,0,.45);transform:rotate(-2deg);border:1px solid rgba(70,45,29,.25)}
+.notice-paper:before{content:"";position:absolute;left:50%;top:-10px;width:54px;height:18px;transform:translateX(-50%) rotate(1deg);background:#b7a079aa}
+.notice-paper b{display:block;text-align:center;font:800 19px/1.3 "Noto Sans KR",sans-serif;border-bottom:1px solid rgba(70,45,29,.25);padding-bottom:10px;margin-bottom:13px}
+.notice-paper p{margin:0;text-align:center;font:600 13px/1.65 "Noto Sans KR",sans-serif}.notice-paper p strong{color:#7a302b}
+.notice-paper small{display:block;text-align:right;margin-top:16px;font:700 10px/1.3 "Noto Sans KR",sans-serif}
+.notebook-box{position:absolute;right:12%;bottom:16%;padding:13px 18px;background:#4e4034;border:1px solid #8a745f;color:#eadfcf;font:700 11px/1 Arial,sans-serif;letter-spacing:.12em;box-shadow:0 12px 22px rgba(0,0,0,.35)}
+.notebook-art{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 40%,#3f3128,#17120f 72%)}
+.notebook-cover{position:absolute;left:50%;top:50%;width:58%;height:70%;transform:translate(-50%,-50%) rotate(-2deg);background:linear-gradient(90deg,#4c2c24,#704238 8%,#5b342c 12%,#5b342c 100%);border-radius:4px 10px 10px 4px;box-shadow:0 28px 45px rgba(0,0,0,.55);border:1px solid #8e665b;padding:36px 30px;color:#efe2d3;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
+.notebook-cover:before{content:"";position:absolute;inset:16px;border:1px solid rgba(239,226,211,.35);pointer-events:none}
+.notebook-cover small,.notebook-cover span{font:700 9px/1.5 Arial,sans-serif;letter-spacing:.16em}.notebook-cover b{font:800 28px/1.2 "Noto Sans KR",sans-serif;letter-spacing:-.04em}
+.pencil-note{position:absolute;right:5%;top:18%;padding:10px 12px;background:#e7dcc8;color:#4b3b2d;font:700 12px/1.4 "Noto Sans KR",sans-serif;transform:rotate(6deg);box-shadow:0 9px 18px rgba(0,0,0,.27)}
+.pencil-note.second{left:5%;right:auto;top:auto;bottom:16%;transform:rotate(-7deg);color:#7a302b}
+.rulebook-detail{display:grid;gap:7px;margin-top:4px}.rulebook-detail section{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:7px 0;border-top:1px solid rgba(73,49,34,.16)}.rulebook-detail section:first-child{border-top:0;padding-top:0}.rulebook-detail b{font:900 10px/1 Arial,sans-serif;color:#9c3d32;padding-top:3px;letter-spacing:.08em}.rulebook-detail strong{display:block;font-size:12px;line-height:1.48;color:#3e3028}.rulebook-detail p{margin:3px 0 0;font-size:10.5px;line-height:1.5;color:#79695b}
+.jangseung-art{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#101522 0 44%,#191c20 44% 52%,#17130f 52% 100%)}
+.jangseung-art:before{content:"";position:absolute;left:50%;bottom:-10%;width:58%;height:69%;transform:translateX(-50%);background:linear-gradient(88deg,#292622,#675945 48%,#28231f 52%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
+.road-glow{position:absolute;left:50%;bottom:0;width:36%;height:63%;transform:translateX(-50%);background:linear-gradient(180deg,rgba(231,197,127,.11),rgba(231,197,127,0));clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)}
+.jangseung{position:absolute;bottom:20%;width:50px;height:48%;background:linear-gradient(90deg,#5c351f,#8a5430 44%,#55301d);border-radius:45% 45% 10% 10% / 15% 15% 4% 4%;box-shadow:0 18px 26px rgba(0,0,0,.4);transform-origin:50% 100%}
+.jangseung:before{content:"";position:absolute;left:8px;right:8px;top:7%;height:16%;border-top:5px solid #251712;border-bottom:4px solid #251712;border-radius:50%}
+.jangseung i:before,.jangseung i:after{content:"";position:absolute;top:13%;width:6px;height:6px;border-radius:50%;background:#160f0c;box-shadow:0 0 8px rgba(177,45,35,.6)}.jangseung i:before{left:13px}.jangseung i:after{right:13px}.jangseung b{position:absolute;left:50%;top:30%;transform:translateX(-50%);writing-mode:vertical-rl;color:#21130e;font:900 13px/1 "Noto Sans KR",sans-serif;letter-spacing:.08em}
+.post-a{left:22%;transform:rotate(-4deg)}.post-b{right:22%;transform:rotate(4deg)}.post-b.turned{filter:saturate(.65) contrast(1.12);box-shadow:0 20px 32px rgba(0,0,0,.52),0 0 22px rgba(115,32,25,.12)}
+.jangseung-caption{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);width:72%;padding:11px 14px;text-align:center;color:#eadbc8;background:rgba(20,13,10,.76);border:1px solid rgba(255,255,255,.16);font:600 12px/1.5 "Noto Sans KR",sans-serif}.jangseung-caption strong{color:#d56a58}
+.unrecorded-note{padding:12px 14px;border:1px solid rgba(128,50,40,.25);background:#f0e1c8;margin-bottom:10px}.unrecorded-note p{margin:0 0 8px;font-size:11px;line-height:1.55;color:#5a493b}.unrecorded-note strong{display:block;color:#8b3029;font-size:12px}.traveller-records{display:grid;gap:7px}.traveller-records section{padding:8px 10px;background:#f2ead8;border-left:3px solid #7a5540;transform:rotate(-.15deg)}.traveller-records section:nth-child(even){transform:rotate(.2deg);background:#eadfc9}.traveller-records b{display:block;margin-bottom:4px;font:800 9px/1 Arial,sans-serif;letter-spacing:.08em;color:#8b3b32}.traveller-records p{margin:0;font-size:10.5px;line-height:1.5;color:#44362d}
+.viewer-content>.notice-art,.viewer-content>.notebook-art,.viewer-content>.jangseung-art{position:relative;inset:auto;width:min(720px,100%);height:min(78vh,760px);min-height:520px;margin:auto}
+@media(max-width:820px){.notice-paper{left:23%;width:60%;padding:16px 14px}.notice-paper b{font-size:16px}.notice-paper p{font-size:11px}.notebook-cover{width:72%;height:72%;padding:28px 22px}.notebook-cover b{font-size:22px}.pencil-note{font-size:10px}.rulebook-detail p{font-size:11px}.rulebook-detail strong{font-size:12px}.jangseung{height:45%;width:44px}.post-a{left:15%}.post-b{right:15%}.traveller-records p{font-size:11px}}
